@@ -14,15 +14,10 @@ const MAX_USERS = 4 #not including host
 
 func _ready():
 #	OS.shell_open(ProjectSettings.globalize_path("user://"))
-	if OS.has_feature("windows"):
-		if OS.has_environment("COMPUTERNAME"):
-			current_ip.text = "your ip: " + IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)
-	elif OS.has_feature("x11"):
-		if OS.has_environment("HOSTNAME"):
-			current_ip.text = "your ip: " + IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
-	elif OS.has_feature("OSX"):
-		if OS.has_environment("HOSTNAME"):
-			current_ip.text = "your ip: " + IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
+	var out = []
+	print(OS.execute("python",[ProjectSettings.globalize_path("res://hostname.py")],out))
+	var hostname = out[0].replace("\n",'')
+	current_ip.text = "your ip: " + IP.resolve_hostname(hostname, IP.TYPE_IPV4)
 	multiplayer.connected_to_server.connect(enter_room)
 	multiplayer.peer_connected.connect(user_entered)
 	multiplayer.peer_disconnected.connect(user_exited)
