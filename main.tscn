@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3 uid="uid://di31jb3v252gh"]
+
+[ext_resource type="Script" path="res://chat.gd" id="1_gld2l"]
+[ext_resource type="Texture2D" uid="uid://de8eir6ytrn8c" path="res://theme/arrow.svg" id="2_1uver"]
+
+[node name="client" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gld2l")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer3"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer3/VBoxContainer"]
+layout_mode = 2
+
+[node name="ip" type="LineEdit" parent="VBoxContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+placeholder_text = "Enter the ip here"
+
+[node name="connect" type="Button" parent="VBoxContainer3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Connect"
+
+[node name="currentIp" type="Label" parent="VBoxContainer3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "current ip:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer3/VBoxContainer"]
+layout_mode = 2
+
+[node name="host" type="Button" parent="VBoxContainer3/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Host"
+
+[node name="leave" type="Button" parent="VBoxContainer3/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Leave"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="chatDisplay" type="ItemList" parent="VBoxContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="message" type="LineEdit" parent="VBoxContainer3/VBoxContainer2"]
+layout_mode = 2
+placeholder_text = "Enter message here"
+
+[node name="send" type="Button" parent="VBoxContainer3/VBoxContainer2/message"]
+custom_minimum_size = Vector2(31, 31)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -4.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 1.5708
+pivot_offset = Vector2(15.5, 15.5)
+theme_type_variation = &"leftFlat"
+icon = ExtResource("2_1uver")
+expand_icon = true
