@@ -16,8 +16,10 @@ func _ready():
 #	OS.shell_open(ProjectSettings.globalize_path("user://"))
 	var out = []
 	print(OS.execute("python",[ProjectSettings.globalize_path("res://hostname.py")],out))
-	var hostname = out[0].replace("\n",'')
-	if !hostname:
+	var hostname :String = out[0].replace("\n",'')
+	print(IP.resolve_hostname(hostname))
+	current_ip.text = "your ip: " + IP.resolve_hostname(hostname, IP.TYPE_IPV4)
+	if hostname.is_empty():
 		if OS.has_feature("windows"):
 			if OS.has_environment("COMPUTERNAME"):
 				current_ip.text = "your ip: " + IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)
@@ -27,7 +29,6 @@ func _ready():
 		elif OS.has_feature("OSX"):
 			if OS.has_environment("HOSTNAME"):
 				current_ip.text = "your ip: " + IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
-	current_ip.text = "your ip: " + IP.resolve_hostname(hostname, IP.TYPE_IPV4)
 	multiplayer.connected_to_server.connect(enter_room)
 	multiplayer.peer_connected.connect(user_entered)
 	multiplayer.peer_disconnected.connect(user_exited)
